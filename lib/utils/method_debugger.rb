@@ -11,9 +11,9 @@ module JinyuDebugTools
 
           alias_method "__#{method_name}".to_sym, method_name
 
-          define_method(method_name) do |*method_args|
+          define_method(method_name) do |*method_args, &block|
             puts "jinyu.debug: #{caller[0]} calls #{method_name}, #{method_args}" if !method_name.to_sym.match(/^__/)
-            self.send("__#{method_name}".to_sym, *method_args)
+            self.send("__#{method_name}".to_sym, *method_args, &block)
           end
         end
       end
