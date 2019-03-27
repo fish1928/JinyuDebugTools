@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'jinyu-debug-tools'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = '2019-03-25'
   s.summary     = "simple toolkit for debugging ruby code"
   s.description = "a simple toolkit to debug ruby code, no any guarentee"

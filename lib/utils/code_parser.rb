@@ -72,7 +72,7 @@ module JinyuDebugTools
     
         child_level = parent_node.get_level + 1
     
-        mistab_nodes = _find_mistab_nodes(parent_node_index, child_level)
+        mistab_nodes = _find_mistab_nodes(parent_node_index, child_level, parent_node)
         if mistab_nodes.any?
           mistab_nodes.each do |mistab_node|
             mistab_node.set_parent(parent_node)
@@ -122,12 +122,13 @@ module JinyuDebugTools
         return target_node, target_index
       end
     
-      def _find_mistab_nodes(parent_node_index, child_level)
+      def _find_mistab_nodes(parent_node_index, child_level, parent_node)
         # ... because, the father node which attached on root directly like new
         # would match this situation, parent is root and level < child_level
         mistab_nodes = @node_level_list[parent_node_index...-1].select do |node, level|
           next false if node.get_parent != @root
           next false if node.get_level >= child_level
+          next false if node == parent_node # parent node on root bug
           true
         end
     
